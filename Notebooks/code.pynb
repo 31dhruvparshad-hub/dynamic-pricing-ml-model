@@ -1,0 +1,40 @@
+# data_cleaning
+import pandas as pd
+from src.preprocess import load_and_clean_data
+
+df = load_and_clean_data("data/raw/sample_data.csv")
+df.head()
+
+# feature_Selection
+from src.features import create_features
+
+df_fe = create_features(df)
+df_fe.head()
+
+
+# model_training
+from src.train import train_models
+
+features = [
+    "price_after_discount",
+    "discount_pct",
+    "competitor_diff",
+    "lag_1_sales",
+    "rolling_mean_7"
+]
+
+X = df_fe[features]
+y = df_fe["units_sold"]
+
+models = train_models(X, y)
+
+# evaluation
+from sklearn.model_selection import train_test_split
+from src.evaluate import evaluate_models
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, shuffle=False
+)
+
+results = evaluate_models(models, X_test, y_test)
+results
