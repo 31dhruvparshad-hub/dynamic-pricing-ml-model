@@ -1,13 +1,14 @@
 import pandas as pd
 
 def load_and_clean_data(path: str) -> pd.DataFrame:
+
     df = pd.read_csv(path, parse_dates=["InvoiceDate"])
 
-    # Remove invalid rows
+    # Remove invalid records
     df = df[df["Quantity"] > 0]
     df = df[df["UnitPrice"] > 0]
 
-    # Rename to standard pipeline names
+    # Standardize column names
     df = df.rename(columns={
         "InvoiceDate": "date",
         "StockCode": "product_id",
