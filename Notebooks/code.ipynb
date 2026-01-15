@@ -1,5 +1,0 @@
-import pandas as pd
-from src.preprocess import load_and_clean_data
-
-df = load_and_clean_data("data/raw/sample_data.csv")
-df.head()
