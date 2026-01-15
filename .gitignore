@@ -2,3 +2,7 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 data/processed/
+data/raw/*.csv
+data/raw/*.gz
+data/raw/*.zip
+
